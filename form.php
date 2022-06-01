@@ -91,12 +91,21 @@
                                         4</label><br />    
                                         
                                     <label>
-                                        Сверхспособности:
+                                         Сверхспособности:
                                         <br />
-                                        <select name="superpowers" multiple="multiple">
-                                        <option value="inf" <?php if($values['superpowers']=="inf"){print "selected='selected'";}?>>Бессмертие</option>
-                                        <option value="levitation" <?php if($values['superpowers']=="levitation"){print "selected='selected'";}?>>Левитация</option>
-                                        <option value="through" <?php if($values['superpowers']=="through"){print "selected='selected'";}?>>Прохождение сквозь стены</option>
+                                        <select name="superpowers[]" multiple="multiple">
+                                        <option value="inf" 
+                                        <?php if(in_array("inf", $values['superpowers'])){
+                                            print "selected='selected'";}
+                                        ?>>Бессмертие</option>
+                                        <option value="levitation" 
+                                        <?php if(in_array("levitation", $values['superpowers'])){
+                                            print "selected='selected'";}
+                                        ?>>Левитация</option>
+                                        <option value="through" 
+                                        <?php if(in_array("through", $values['superpowers'])){
+                                            print "selected='selected'";}
+                                        ?>>Прохождение сквозь стены</option>
                                         </select>
                                     </label><br />
                                     <label>

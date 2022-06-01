@@ -80,7 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     $values['date'] = empty($_COOKIE['date_value']) ? '' : $_COOKIE['date_value'];
     $values['radio-group-1'] = empty($_COOKIE['radio-group-1_value']) ? '' : $_COOKIE['radio-group-1_value'];
     $values['radio-group-2'] = empty($_COOKIE['radio-group-2_value']) ? '' : $_COOKIE['radio-group-2_value'];
-    $values['superpowers'] = empty($_COOKIE['superpowers_value']) ? '' : $_COOKIE['superpowers_value'];
+    $values['superpowers'] = empty($_COOKIE['superpowers_value']) ? [] : explode(", ", $_COOKIE['superpowers_value']);
     $values['biography'] = empty($_COOKIE['biography_value']) ? '' : $_COOKIE['biography_value'];
     $values['check-1'] = empty($_COOKIE['check-1_value']) ? '' : $_COOKIE['check-1_value'];
   
@@ -138,7 +138,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
                     WHERE power_id = '$id'
                 ");
 
-                $values['superpowers'] = $data->fetchALL()[0]['powers'];
+                $values['superpowers'] = explode(", ", $data->fetchALL()[0]['powers']);
 
                 $messages[] = "Вход с логином " . $login;
                 $messages[] = "<form action=\"?\" method=\"post\">
@@ -219,7 +219,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         $errors = TRUE;
       }
       else {
-        setcookie('superpowers_value', $_POST['superpowers'], time() + 365 * 24 * 60 * 60);
+        setcookie('superpowers_value', implode(", ", $_POST['superpowers']), time() + 365 * 24 * 60 * 60);
       }
       if (empty($_POST['biography'])) {
         setcookie('biography_error', '1', time() + 24 * 60 * 60);
@@ -285,7 +285,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             $date = $_POST['date'];
             $gender = $_POST['radio-group-1'];
             $limbs = $_POST['radio-group-2'];
-            $powers = $_POST['superpowers'];
+            $powers = implode(", ", $_POST['superpowers']);
             $policy = $_POST['check-1'];
             $biography = $_POST['biography'];
           
@@ -335,7 +335,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
         $date = $_POST['date'];
         $gender = $_POST['radio-group-1'];
         $limbs = $_POST['radio-group-2'];
-        $powers = $_POST['superpowers'];
+        $powers = implode(", ", $_POST['superpowers']);
         $policy = $_POST['check-1'];
         $biography = $_POST['biography'];
 
